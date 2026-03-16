@@ -1,0 +1,89 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+:root {
+  font-family: Inter, system-ui, sans-serif;
+  line-height: 1.5;
+  font-weight: 400;
+  color-scheme: dark;
+  font-synthesis: none;
+  text-rendering: optimizeLegibility;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+}
+
+* {
+  scrollbar-width: thin;
+  scrollbar-color: #2a3050 #0a0e1a;
+}
+
+::selection {
+  background: rgba(212, 165, 116, 0.3);
+}
+
+body {
+  margin: 0;
+  min-width: 320px;
+  background-color: #0a0e1a;
+  color: #f1f5f9;
+}
+
+input[type="range"] {
+  -webkit-appearance: none;
+  appearance: none;
+  height: 4px;
+  border-radius: 2px;
+  background: #2a3050;
+  outline: none;
+  width: 100%;
+}
+
+input[type="range"]::-webkit-slider-thumb {
+  -webkit-appearance: none;
+  appearance: none;
+  width: 16px;
+  height: 16px;
+  border-radius: 50%;
+  background: #D4A574;
+  cursor: pointer;
+  border: 2px solid #0a0e1a;
+  transition: transform 0.15s ease;
+}
+
+input[type="range"]::-webkit-slider-thumb:hover {
+  transform: scale(1.2);
+}
+
+input[type="range"]::-moz-range-thumb {
+  width: 16px;
+  height: 16px;
+  border-radius: 50%;
+  background: #D4A574;
+  cursor: pointer;
+  border: 2px solid #0a0e1a;
+}
+
+@layer components {
+  .card {
+    @apply bg-[#1a1f35] border border-[#2a3050] rounded-lg;
+    transition: border-color 0.2s ease, box-shadow 0.2s ease;
+  }
+  .card:hover {
+    border-color: rgba(212, 165, 116, 0.3);
+    box-shadow: 0 0 20px rgba(212, 165, 116, 0.05);
+  }
+  .section-label {
+    @apply font-mono text-xs uppercase tracking-widest text-slate-500 mb-6;
+  }
+}
+
+@keyframes fadeSlideUp {
+  from { opacity: 0; transform: translateY(12px); }
+  to { opacity: 1; transform: translateY(0); }
+}
+
+.animate-section {
+  animation: fadeSlideUp 0.5s ease-out forwards;
+  opacity: 0;
+}
