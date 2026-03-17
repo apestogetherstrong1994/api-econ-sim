@@ -9,9 +9,6 @@ export default function Section00Header() {
               <span className="px-2 py-0.5 rounded text-[10px] font-mono uppercase tracking-wider bg-anthropic/10 text-anthropic border border-anthropic/20">
                 Interactive Tool
               </span>
-              <span className="px-2 py-0.5 rounded text-[10px] font-mono uppercase tracking-wider bg-slate-800 text-slate-400 border border-slate-700">
-                Confidential
-              </span>
             </div>
             <h1 className="font-mono text-2xl md:text-3xl font-bold text-white tracking-tight">
               AI API Economics Simulator
