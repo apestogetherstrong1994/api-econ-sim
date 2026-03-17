@@ -57,6 +57,10 @@ export default function Section08Insights({ insights }) {
           );
         })}
       </div>
+
+      <p className="text-[10px] text-slate-600 mt-3 font-mono">
+        Insights are dynamically generated from current workload parameters by comparing provider costs, cache/batch impact, and routing potential. Thresholds: cost gap &gt;15% flagged, savings &gt;$100/mo surfaced.
+      </p>
     </section>
   );
 }

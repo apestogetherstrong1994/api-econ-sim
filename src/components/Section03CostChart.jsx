@@ -152,6 +152,9 @@ export default function Section03CostChart({ costs, chartMode, onChartModeChange
             </span>
           </div>
         )}
+        <p className="text-[10px] text-slate-600 text-center mt-3 font-mono">
+          Net monthly cost = (input + output token costs) &minus; cache savings &minus; batch discounts + long-context premiums. One tier-appropriate model per provider.
+        </p>
       </div>
     </section>
   );

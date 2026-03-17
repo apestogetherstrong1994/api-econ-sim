@@ -30,10 +30,17 @@ export default function Section07Routing({ workload, routingSplit, onRoutingSpli
     // Redistribute remaining across other tiers proportionally
     const others = Object.keys(newSplit).filter((k) => k !== tier);
     const remaining = 1 - newValue;
-    const otherTotal = others.reduce((s, k) => s + routingSplit[k], 0) || 1;
+    const otherTotal = others.reduce((s, k) => s + routingSplit[k], 0);
 
-    for (const k of others) {
-      newSplit[k] = remaining * (routingSplit[k] / otherTotal);
+    if (otherTotal === 0) {
+      // When both others are 0, distribute remaining equally
+      for (const k of others) {
+        newSplit[k] = remaining / others.length;
+      }
+    } else {
+      for (const k of others) {
+        newSplit[k] = remaining * (routingSplit[k] / otherTotal);
+      }
     }
 
     onRoutingSplitChange(newSplit);
@@ -167,7 +174,7 @@ export default function Section07Routing({ workload, routingSplit, onRoutingSpli
           </div>
 
           <p className="text-[10px] text-slate-600 mt-4 font-mono">
-            Anthropic&apos;s 3-tier lineup (Haiku &rarr; Sonnet &rarr; Opus) is purpose-built for intelligent model routing.
+            Blended cost = weighted sum of tier costs by routing split. &ldquo;Single-Tier (Mid)&rdquo; baseline uses each provider&apos;s mid-tier model for 100% of requests. Anthropic&apos;s 3-tier lineup (Haiku &rarr; Sonnet &rarr; Opus) is purpose-built for routing.
           </p>
         </div>
       </div>

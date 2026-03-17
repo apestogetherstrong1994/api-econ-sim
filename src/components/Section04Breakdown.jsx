@@ -98,6 +98,9 @@ export default function Section04Breakdown({ costs }) {
             ))}
           </tbody>
         </table>
+        <p className="text-[10px] text-slate-600 mt-3 font-mono px-3">
+          Green = lowest cost for that metric, red = highest. Cache savings assume warm cache at published read rates. Batch discount = 50% on eligible tokens (Anthropic &amp; OpenAI only).
+        </p>
       </div>
     </section>
   );

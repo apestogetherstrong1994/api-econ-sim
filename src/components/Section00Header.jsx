@@ -32,6 +32,9 @@ export default function Section00Header() {
             </div>
           </div>
         </div>
+        <p className="text-[10px] text-slate-600 mt-4 font-mono max-w-3xl">
+          All pricing from official provider pages as of March 2026. Benchmark scores are illustrative composites from public Q1 2026 evaluations. Enterprise-negotiated rates and private benchmarks may differ.
+        </p>
       </div>
     </header>
   );

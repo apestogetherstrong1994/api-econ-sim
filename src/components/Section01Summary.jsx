@@ -45,7 +45,7 @@ export default function Section01Summary({ costs }) {
 
   return (
     <section className="max-w-7xl mx-auto px-6 py-8 animate-section" style={{ animationDelay: '100ms' }}>
-      <div className="section-label">[ 01 ] Executive Summary</div>
+      <div className="section-label">[ 01 ] Executive Summary <span className="text-slate-600 normal-case tracking-normal">&mdash; Monthly Estimates</span></div>
       <div className="grid grid-cols-2 md:grid-cols-3 lg:grid-cols-6 gap-3">
         <StatCard
           label="Cheapest Provider"
@@ -84,6 +84,9 @@ export default function Section01Summary({ costs }) {
           type="neutral"
         />
       </div>
+      <p className="text-[10px] text-slate-600 mt-3 font-mono">
+        Based on standard published API pricing (March 2026). Costs reflect selected workload config including cache &amp; batch discounts where available. Enterprise-negotiated rates may differ.
+      </p>
     </section>
   );
 }

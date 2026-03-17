@@ -1,4 +1,4 @@
-import { PROVIDERS, PROVIDER_ORDER, getModelForTier } from '../data/providers';
+import { PROVIDERS, PROVIDER_ORDER, getModelForTier, FRONTIER_EXTRA_MODELS, FRONTIER_PROVIDER_INFO } from '../data/providers';
 import { BENCHMARKS, getCompositeScore } from '../data/benchmarks';
 
 // ─── Formatting Utilities ────────────────────────────────────────────────────
@@ -270,6 +270,7 @@ export function computeScenarioMatrix(workload) {
 export function computeFrontierData(workload, benchmarkKey = 'composite') {
   const allModels = [];
 
+  // Current-generation models from main providers
   for (const providerId of PROVIDER_ORDER) {
     const provider = PROVIDERS[providerId];
     for (const [modelId, model] of Object.entries(provider.models)) {
@@ -291,6 +292,31 @@ export function computeFrontierData(workload, benchmarkKey = 'composite') {
           tier: model.tier,
         });
       }
+    }
+  }
+
+  // Legacy, older-generation, and open-source models
+  for (const extra of FRONTIER_EXTRA_MODELS) {
+    const model = { input: extra.input, output: extra.output, name: extra.name };
+    const cost = calculateModelCost(model, workload);
+    const score = benchmarkKey === 'composite'
+      ? getCompositeScore(extra.id)
+      : (BENCHMARKS[extra.id]?.[benchmarkKey] || 0);
+
+    const providerInfo = PROVIDERS[extra.providerId] || FRONTIER_PROVIDER_INFO[extra.providerId];
+
+    if (score > 0 && providerInfo) {
+      allModels.push({
+        modelId: extra.id,
+        modelName: extra.name,
+        providerId: extra.providerId,
+        providerName: providerInfo.name,
+        color: providerInfo.color,
+        costPerRequest: cost.costPerRequest,
+        monthlyCost: cost.netCost,
+        score,
+        tier: extra.tier,
+      });
     }
   }
 

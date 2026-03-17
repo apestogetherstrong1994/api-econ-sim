@@ -119,6 +119,10 @@ export default function Section05Sensitivity({ sensitivityData, scenarioMatrix }
           )}
         </div>
       </div>
+
+      <p className="text-[10px] text-slate-600 mt-3 font-mono">
+        Tornado: &plusmn;20% swing on rates, &plusmn;50% on volume/token counts, applied to Anthropic&apos;s cost. Scenario matrix fixes cache at 20%/80% and batch at 0%/70% to isolate their combined impact.
+      </p>
     </section>
   );
 }

@@ -160,10 +160,15 @@ export default function Section02Configurator({ activePreset, workload, onPreset
               onChange={(v) => {
                 const split = { ...(workload.routingSplit || { budget: 0.70, mid: 0.25, frontier: 0.05 }) };
                 const remaining = 1 - v;
-                const otherTotal = split.mid + split.frontier || 1;
+                const otherTotal = split.mid + split.frontier;
                 split.budget = v;
-                split.mid = remaining * (split.mid / otherTotal);
-                split.frontier = remaining * (split.frontier / otherTotal);
+                if (otherTotal === 0) {
+                  split.mid = remaining / 2;
+                  split.frontier = remaining / 2;
+                } else {
+                  split.mid = remaining * (split.mid / otherTotal);
+                  split.frontier = remaining * (split.frontier / otherTotal);
+                }
                 handleParamChange('routingSplit', split);
               }}
               min={0}
@@ -177,10 +182,15 @@ export default function Section02Configurator({ activePreset, workload, onPreset
               onChange={(v) => {
                 const split = { ...(workload.routingSplit || { budget: 0.70, mid: 0.25, frontier: 0.05 }) };
                 const remaining = 1 - v;
-                const otherTotal = split.budget + split.frontier || 1;
+                const otherTotal = split.budget + split.frontier;
                 split.mid = v;
-                split.budget = remaining * (split.budget / otherTotal);
-                split.frontier = remaining * (split.frontier / otherTotal);
+                if (otherTotal === 0) {
+                  split.budget = remaining / 2;
+                  split.frontier = remaining / 2;
+                } else {
+                  split.budget = remaining * (split.budget / otherTotal);
+                  split.frontier = remaining * (split.frontier / otherTotal);
+                }
                 handleParamChange('routingSplit', split);
               }}
               min={0}
@@ -194,10 +204,15 @@ export default function Section02Configurator({ activePreset, workload, onPreset
               onChange={(v) => {
                 const split = { ...(workload.routingSplit || { budget: 0.70, mid: 0.25, frontier: 0.05 }) };
                 const remaining = 1 - v;
-                const otherTotal = split.budget + split.mid || 1;
+                const otherTotal = split.budget + split.mid;
                 split.frontier = v;
-                split.budget = remaining * (split.budget / otherTotal);
-                split.mid = remaining * (split.mid / otherTotal);
+                if (otherTotal === 0) {
+                  split.budget = remaining / 2;
+                  split.mid = remaining / 2;
+                } else {
+                  split.budget = remaining * (split.budget / otherTotal);
+                  split.mid = remaining * (split.mid / otherTotal);
+                }
                 handleParamChange('routingSplit', split);
               }}
               min={0}
@@ -207,6 +222,9 @@ export default function Section02Configurator({ activePreset, workload, onPreset
             />
           </div>
         )}
+        <p className="text-[10px] text-slate-600 mt-4 font-mono">
+          Preset workloads are representative industry archetypes. Adjust sliders to model your specific use case. &ldquo;Routing&rdquo; tier simulates intelligent model selection across budget/mid/frontier.
+        </p>
       </div>
     </section>
   );

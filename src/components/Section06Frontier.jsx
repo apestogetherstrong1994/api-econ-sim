@@ -108,8 +108,8 @@ export default function Section06Frontier({ frontierData, benchmarkKey, onBenchm
               opacity={0.4}
             />
 
-            {/* Individual provider scatters */}
-            {['anthropic', 'openai', 'google', 'xai'].map((pid) => {
+            {/* Individual provider scatters — dynamically from data */}
+            {[...new Set(allModels.map((m) => m.providerId))].map((pid) => {
               const providerModels = allModels.filter((m) => m.providerId === pid);
               if (providerModels.length === 0) return null;
               return (
@@ -125,12 +125,13 @@ export default function Section06Frontier({ frontierData, benchmarkKey, onBenchm
           </ComposedChart>
         </ResponsiveContainer>
 
-        <div className="flex justify-center gap-6 mt-4">
+        <div className="flex flex-wrap justify-center gap-x-5 gap-y-1 mt-4">
           {[
             { color: '#D4A574', label: 'Anthropic' },
             { color: '#10B981', label: 'OpenAI' },
             { color: '#4285F4', label: 'Google' },
             { color: '#EF4444', label: 'xAI' },
+            { color: '#A78BFA', label: 'Open Source' },
           ].map((item) => (
             <div key={item.label} className="flex items-center gap-1.5 text-xs text-slate-400">
               <span className="w-2.5 h-2.5 rounded-full" style={{ backgroundColor: item.color }} />
@@ -144,7 +145,7 @@ export default function Section06Frontier({ frontierData, benchmarkKey, onBenchm
         </div>
 
         <p className="text-[10px] text-slate-600 text-center mt-3 font-mono">
-          Estimated &mdash; Q1 2026 public benchmarks. Higher = better. Left = cheaper.
+          Illustrative Q1 2026 benchmarks (composite of MMLU, HumanEval, SWE-bench, MATH). OSS priced at cheapest cloud inference (Together AI / Fireworks).
         </p>
       </div>
     </section>
